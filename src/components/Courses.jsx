@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Pagination from "./Pagination";
+import '../App.css';
 
 function Courses() {
   const [token, setToken] = useState("");
@@ -56,19 +57,19 @@ function Courses() {
           </div>
         )}
         {courses.length === 0 && !loading ? (
-          <p>No courses available</p>
+          <p className="text-center text-3xl text-red-400">No courses available</p>
         ) : (
           <div className="flex gap-5 flex-wrap justify-center my-3">
             {courses.map((course) => (
               <div
                 key={course.id}
-                className="w-60 h-96 bg-white rounded-md shadow-md overflow-hidden"
+                className="card-container"
               >
-                <div className="rounded-t-md overflow-hidden">
-                  <img src={course.image} alt="image" className="" />
+                <div className="card-img">
+                  <img src={course.image} alt="image" />
                 </div>
                 <span
-                  className="p-2 text-white mt-2 border-2 border-white border-l-0"
+                  className="card-badge"
                   style={{
                     backgroundColor: course.badge_color
                       ? course.badge_color
@@ -77,13 +78,13 @@ function Courses() {
                 >
                   {course.badge_text}
                 </span>
-                <div className="p-2 text-clip overflow-hidden">
-                  <h1 className="text-lg font-bold">{course.title}</h1>
-                  <p className="text-gray-700 text-sm overflow-hidden line-clamp-4">{course.description}</p>
-                  <p className="text-base font-bold text-cyan-700">
+                <div className="card-section">
+                  <h1 className="card-section-title">{course.title}</h1>
+                  <p className="card-section-description">{course.description}</p>
+                  <p className="card-section-instructor">
                     Instructor: {course.instructor_name}
                   </p>
-                  <p className="text-sm text-gray-500">{course.created_at}</p>
+                  <p className="card-section-time">{course.created_at}</p>
                 </div>
               </div>
             ))}
