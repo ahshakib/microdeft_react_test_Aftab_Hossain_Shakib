@@ -38,7 +38,6 @@ function Courses() {
       setCourses(data.data.data);
       setCurrentPage(data.data.meta.current_page);
       setTotalPages(data.data.meta.last_page);
-      console.log(data.data.data);
     } catch (error) {
       console.log(error.message);
     } finally {

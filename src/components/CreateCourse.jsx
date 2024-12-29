@@ -36,8 +36,6 @@ function CreateCourse() {
           body: JSON.stringify(courseData),
         }
       );
-      const data = await response.json();
-      console.log(data);
       if (response.ok) {
         alert("Course created successfully");
         navigate("/courses");

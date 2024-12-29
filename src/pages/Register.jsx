@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Microdeft-logo.png";
 
 function Register() {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,12 +25,18 @@ function Register() {
       );
       if (!response.ok) {
         setError("Registration failed");
+      } else {
+        setError("");
+        alert("Registration successful");
+        const data = await response.json();
+        data.data.token && localStorage.setItem("authToken", data.data.token);
+        if(data.data.token) {
+          navigate("/");
+        }
       }
-      setError("");
-      const data = await response.json();
-      console.log(data);
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      setError(error.message);
+      setError("Something went wrong! Please try again.");
     }
     setFormData({
       name: "",

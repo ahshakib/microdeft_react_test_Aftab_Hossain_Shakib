@@ -26,15 +26,16 @@ function Login() {
         setError("Login failed");
       } else {
         setError("");
+        alert("Login successful");
         const data = await response.json();
-        console.log(data);
         data.data.token && localStorage.setItem("authToken", data.data.token);
         if(data.data.token) {
           navigate("/");
         }
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      setError(error.message);
+      setError("Something went wrong! Please try again.");
     }
     setFormData({
       email: "",
